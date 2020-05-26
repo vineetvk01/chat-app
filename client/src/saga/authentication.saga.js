@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 
-import { setUserAction, unsetUserAction, authFailedAction, setSignupErrorAction } from '../actions/authActions';
+import { setUserAction, unsetUserAction, authFailedAction, setSignupErrorAction, setSignupSuccessAction } from '../actions/authActions';
 import { AUTH_REQUEST, FETCH_USER, LOGOUT_REQUEST, SIGNUP_REQUEST } from '../actions/types';
 import { authenticateUser, logoutUser, userAuthStatus, signupUser } from '../services/auth';
 
@@ -9,7 +9,6 @@ import { authenticateUser, logoutUser, userAuthStatus, signupUser } from '../ser
 function* authRequestWorker({ type, payload = {} }) {
   if (type === AUTH_REQUEST) {
     const response = yield call(authenticateUser, payload);
-    console.log(response)
     if (response.status === 'success') {
       yield put(setUserAction(response.user));
     } else {
@@ -32,9 +31,8 @@ function* fetchAuthenticatedUser({ type, payload = {} }) {
 
 function* signupWorker({ type, payload = {} }) {
   const response = yield call(signupUser, payload);
-  console.log(response)
-  if (response.status === 'success') {
-    yield put(setUserAction(response.user));
+  if (response.user) {
+    yield put(setSignupSuccessAction());
   } else {
     yield put(setSignupErrorAction(response.error))
   }

@@ -20,12 +20,15 @@ const SignupBox = styled.div`
 const Signup = ({signupRequest, auth}) => {
 
   const [ user, setUser ] = useState(testUser);
-
   const [ error, setError ] = useState({show:false});
+  const [ success, setSuccess ] = useState(false);
 
   useEffect(() => {
     if(auth.signupError && auth.signupError.error){
       setError({show:true, message: auth.signupError.error })
+    }
+    if(auth.signupSuccess){
+      setSuccess(true);
     }
   },[auth]);
 
@@ -78,6 +81,9 @@ const Signup = ({signupRequest, auth}) => {
           <hr />
           <DAlert show={error.show} variant="danger" onClose={() => setError({show: false})} dismissible>
             {error.message}
+          </DAlert>
+          <DAlert show={success} variant="success" onClose={() => setSuccess(false)} dismissible>
+            Successfully SignedUp. Please login to continue
           </DAlert>
           <DForm>
             <DForm.Row>
@@ -157,7 +163,6 @@ const Signup = ({signupRequest, auth}) => {
 };
 
 const mapStateToProps = ({ auth }) => {
-  console.log(auth);
   return { auth };
 }
 

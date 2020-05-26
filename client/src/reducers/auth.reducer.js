@@ -1,4 +1,4 @@
-import { SET_USER, LOGOUT_USER, AUTH_FAILED, CLEAR_ERROR, SIGNUP_ERROR } from '../actions/types'
+import { SET_USER, LOGOUT_USER, AUTH_FAILED, CLEAR_ERROR, SIGNUP_ERROR, SIGNUP_SUCCESS } from '../actions/types'
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
@@ -21,6 +21,7 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT_USER: return initialState; 
     case CLEAR_ERROR: delete state.error; delete state.signupError; return {...state};
     case SIGNUP_ERROR: return {...initialState, signupError: action.payload};
+    case SIGNUP_SUCCESS: return {...initialState, signupSuccess: true};
     default: return state; 
   }
 }
@@ -32,7 +33,7 @@ export const selectUserInfo = (user) => {
 const persistConfig = { 
   key: 'auth',
   storage,
-  blacklist: ['error', 'signupError'],
+  blacklist: ['error', 'signupError', 'signupSuccess'],
 };
 
 export default persistReducer(persistConfig, authReducer);

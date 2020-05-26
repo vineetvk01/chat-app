@@ -1,4 +1,4 @@
-import { LOGOUT_USER, AUTH_REQUEST, SET_USER, LOGOUT_REQUEST, AUTH_FAILED, SIGNUP_REQUEST, SIGNUP_ERROR } from './types'
+import { LOGOUT_USER, AUTH_REQUEST, SET_USER, LOGOUT_REQUEST, AUTH_FAILED, SIGNUP_REQUEST, SIGNUP_ERROR, SIGNUP_SUCCESS } from './types';
 
 export const authRequestAction = (user = { username: '', password: '' }) => ({
     type: AUTH_REQUEST,
@@ -31,6 +31,10 @@ export const signupAction = (user) => ({
 export const setSignupErrorAction = (error) => ({
   type: SIGNUP_ERROR,
   payload: { error }
+})
+
+export const setSignupSuccessAction = () => ({
+  type: SIGNUP_SUCCESS,
 })
 
 

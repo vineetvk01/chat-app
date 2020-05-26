@@ -7,3 +7,4 @@ export const SET_USER = 'SET_USER';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
