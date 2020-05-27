@@ -39,8 +39,6 @@ app.post('/api/user/register', makeCallback(registerUser));
 app.post('/api/user/login', makeCallback(loginUser));
 app.post('/api/user/logout', makeCallback(logoutUser));
 app.get('/api/users/me', makeCallback(userProfile));
-app.put('/api/users/me/update', makeCallback(registerUser));
-app.delete('/api/users/me/delete', makeCallback(registerUser));
 
 // Chats
 app.get('/api/chat/users', makeCallback(getAllChatUsers));
